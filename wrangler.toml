@@ -1,0 +1,24 @@
+name = "purdue-photography-club-scheduler"
+main = "src/index.ts"
+compatibility_date = "2026-06-21"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+[observability]
+enabled = true
+head_sampling_rate = 0.1
+
+[triggers]
+crons = ["*/30 * * * *"]
+
+[[services]]
+binding = "API_WORKER"
+service = "purdue-photography-club-api"
+
+[[ratelimits]]
+name = "SCHEDULER_RATE_LIMITER"
+namespace_id = "1002"
+
+  [ratelimits.simple]
+  limit = 10
+  period = 60
