@@ -50,7 +50,9 @@ export async function runScheduledJobs(
   }
 
   const results = await Promise.all(
-    SCHEDULED_JOB_ENDPOINTS.map((path) => runApiJob(env.API_WORKER, token, path)),
+    SCHEDULED_JOB_ENDPOINTS.map((path) =>
+      runApiJob(env.API_WORKER, token, path, input.scheduledTime),
+    ),
   );
 
   const succeeded = results.filter((result) => result.ok).length;
@@ -85,10 +87,11 @@ async function runApiJob(
   apiWorker: Fetcher,
   token: string,
   path: string,
+  scheduledTime: number,
 ): Promise<ScheduledJobRunResult> {
   const startedAt = Date.now();
   try {
-    const response = await apiWorker.fetch(createApiJobRequest(path, token));
+    const response = await apiWorker.fetch(createApiJobRequest(path, token, scheduledTime));
     const body = await readResponseBody(response);
     const durationMs = Date.now() - startedAt;
 
@@ -128,11 +131,12 @@ async function runApiJob(
   }
 }
 
-function createApiJobRequest(path: string, token: string) {
+function createApiJobRequest(path: string, token: string, scheduledTime: number) {
   return new Request(new URL(path, "https://api.internal"), {
     headers: {
       [INTERNAL_SOURCE_HEADER]: SCHEDULER_WORKER_SOURCE,
       [INTERNAL_TOKEN_HEADER]: token,
+      "x-pcc-scheduled-at": String(scheduledTime),
     },
     method: "POST",
   });
