@@ -3,6 +3,14 @@ import test from "node:test";
 
 import { SCHEDULED_JOB_ENDPOINTS, runScheduledJobs } from "./index.ts";
 
+test("scheduler includes the resumable Discord membership-role reconciliation", () => {
+  assert.ok(
+    SCHEDULED_JOB_ENDPOINTS.includes(
+      "/internal/jobs/memberships/roles/reconcile",
+    ),
+  );
+});
+
 test("scheduler sends the Cloudflare scheduled timestamp with every internal job", async () => {
   const requests = [];
   const scheduledTime = 1_784_001_234_567;
