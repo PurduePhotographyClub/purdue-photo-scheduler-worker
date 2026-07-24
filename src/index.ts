@@ -1,5 +1,6 @@
 export const SCHEDULED_JOB_ENDPOINTS = [
   "/internal/jobs/memberships/expire",
+  "/internal/jobs/memberships/roles/reconcile",
   "/internal/jobs/darkroom/schedule/sweep",
   "/internal/jobs/studio/schedule/sweep",
   "/internal/jobs/darkroom/stats/sync",
