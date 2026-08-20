@@ -31,6 +31,7 @@ sequenceDiagram
   Scheduler->>API: Darkroom stats sync
   Scheduler->>API: Equipment reminder job
   Scheduler->>API: Photographer request expiry job
+  Scheduler->>API: Event carpool expiry job
   API->>Data: Owns database and Discord side effects
   API-->>Scheduler: Per-job status and duration
 ```
@@ -45,6 +46,7 @@ sequenceDiagram
 | Darkroom stats sync | API Worker | Refresh Discord-facing darkroom stats |
 | Equipment reminders | API Worker | Send loan/reminder notifications through the platform |
 | Photographer request expiry | API Worker | Mark expired photographer request posts while leaving requester contact info visible |
+| Event carpool expiry | API Worker | Expire stale event carpool posts through the existing API and Discord workflow |
 
 ## Tech Stack
 

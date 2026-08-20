@@ -6,6 +6,7 @@ export const SCHEDULED_JOB_ENDPOINTS = [
   "/internal/jobs/darkroom/stats/sync",
   "/internal/jobs/equipment/reminders/run",
   "/internal/jobs/photographer-requests/expire",
+  "/internal/jobs/event-carpools/expire",
 ] as const;
 
 const INTERNAL_SOURCE_HEADER = "x-pcc-internal-source";
