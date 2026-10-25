@@ -19,9 +19,10 @@
   },
   "devDependencies": {
     "typescript": "^7.0.2",
-    "wrangler": "^4.151.0"
+    "wrangler": "^4.152.0"
   },
   "overrides": {
-    "sharp": "0.35.5"
+    "sharp": "0.35.5",
+    "undici@^7.0.0": "7.30.1"
   }
 }
