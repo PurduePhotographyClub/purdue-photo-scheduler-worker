@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "typescript": "^7.0.2",
-    "wrangler": "^4.160.1"
+    "wrangler": "^4.165.0"
   },
   "overrides": {
     "sharp": "0.35.5",
